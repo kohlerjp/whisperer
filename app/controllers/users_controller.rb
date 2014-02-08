@@ -10,4 +10,13 @@ class UsersController < ApplicationController
 	def index
 		@users = User.all
 	end
+
+	def friends
+		@user = User.find(params[:id])
+		@graph = Koala::Facebook::API.new(@user.oauth_token) 
+		@friends = @graph.get_connections("me", "friends")
+		respond_to do |format|
+			format.json { render :json => @friends }
+		end
+	end
 end
