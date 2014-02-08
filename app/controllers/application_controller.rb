@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
     def allow_cross_domain_access
        response.headers["Access-Control-Allow-Headers"] = "Content-Type, X-Requested-With"
         response.headers["Access-Control-Allow-Methods"] = "GET, PUT, POST, DELETE"
+        response.headers["Access-Control-Allow-Origin"] = "*"
     end
 
   private
