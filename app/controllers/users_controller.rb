@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 		@graph = Koala::Facebook::API.new(@user.oauth_token) 
 		@friends = @graph.get_connections("me", "friends")
 		@friends.each do |friend|
-			 friend[:image]= "http://graph.facebook.com/#{friend['id']}/picture?type=large"
+			 friend[:image]= "http://graph.facebook.com/#{friend['id']}/picture?type=square"
 		end
 		respond_to do |format|
 			format.json { render :json => @friends }

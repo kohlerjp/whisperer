@@ -3,7 +3,7 @@ $(document).ready(function() {
     // handle friend input search
     var friends = [];
 
-    $.getJSON('http://whisperer.herokuapp.com/users/friends/{user-id}.json',
+    $.getJSON('http://whisperer.herokuapp.com/users/friends/519664289.json',
             function(data) {
                 friends = data;
             });
@@ -40,7 +40,7 @@ var find = function (name, friends) {
     // serach the tokens for potential matches
     for (var i = 0; i < friends.length; i++) {
         // create a new regular expression, which will find the name
-        var findname = new RegExp("\\b" + name + "[a-zA-Z]*");
+        var findname = new RegExp("\\b" + name + "[a-zA-Z]*",'i');
         // if the token is a substring
         var found = findname.exec(friends[i].name);
         // if we find the name add it to the results
