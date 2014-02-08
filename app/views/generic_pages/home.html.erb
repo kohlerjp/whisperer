@@ -1,1 +1,13 @@
-<h1> sup </h1>
+<% if current_user %>
+
+<% profile = @graph.get_object("me") %>
+<% friends = @graph.get_connections("me", "friends") %>
+<ul>
+<% friends.each do |f| %>
+  <li>
+    <%= f["name"] %>
+  </li>
+
+ <% end %>
+</ul>
+<% end %>

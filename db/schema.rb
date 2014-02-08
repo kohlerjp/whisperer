@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140208032721) do
+ActiveRecord::Schema.define(version: 20140208071911) do
+
+  create_table "posts", force: true do |t|
+    t.string   "user_id"
+    t.string   "text"
+    t.boolean  "anonymous",  default: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "provider"
