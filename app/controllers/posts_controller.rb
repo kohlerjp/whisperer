@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :signed_in_user
 
 	def create
     @post = current_user.posts.build(micropost_params)
