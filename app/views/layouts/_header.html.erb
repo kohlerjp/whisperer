@@ -1,0 +1,32 @@
+<!-- top bar - purple -->
+    <div id="topbar_purple">
+     <div class="container">
+     <div class="row">
+     <div class="col-md-12">
+
+     <!-- logo -->
+     <div class="pull-left">
+     <a href="<%= root_url %>">
+         <%= image_tag "logo.png" %>
+                           </a>
+     </div>
+     <!--style="margin-right:10px;" -->
+     <% if current_user %>
+     <!-- log in / out -->
+     <div class="pull-right" id="login">
+     <%= link_to('post',new_post_path,style:"margin-right:10px;") %>
+     <%= link_to('me',current_user,style:"margin-right:10px;") %>
+     <%= link_to('friends',home_path,style:"margin-right:10px;") %>
+     <%= link_to "sign out", signout_path, id: "sign_out" %>
+     </div>
+     <% else %>
+     <div class="pull-right" id="login">
+     <%= link_to "Sign in", "/auth/facebook", id: "sign_in" %>
+ </div>
+
+     <% end %>
+     </div>
+     </div><!-- end row -->
+     </div><!-- end container --> 
+    </div><!-- end top bar purple -->
+

@@ -1,16 +1,3 @@
-<% if current_user %>
-
-<% profile = @graph.get_object("me") %>
-<% friends = @graph.get_connections("me", "friends") %>
-<% friends_id_array = [] %>
-<% friends.each do |friend| %>
-  <% friends_id_array << friend["id"]  %>
- <% end %>
- <% friends_id_array << current_user.uid  %>
-
- <% feed_posts = Post.find_all_by_user_id(friends_id_array,limit: 30) %>
-
-
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
 <!--[if IE 7 ]> <html lang="en" class="no-js ie7"> <![endif]-->
@@ -53,87 +40,61 @@
    <body>
 
 
-   	<!-- white content area -->
-   	<div class="content_area">
+    <!-- white content area -->
+    <div class="content_area">
 
-   	<!-- title and subtitle -->
-   	<div class="container">
+    <!-- post text, person, social sharing -->
+    <div class="container">
 
-   	<% feed_posts.each do |post| %>
-   		<div class="row stream_row">
-
-     <!-- post -->
-     <div class="col-md-7 stream_post">
-     "<%= post.text %>"
+     <!-- post text -->
+     <div class="row">
+     <div class="col-md-12" id="post_text">
+     ���This is a post about a person. It is about John and limited to 130 characters, if that makes sense to you sir.���
+     </div>
      </div>
 
-     <!-- person & sharing -->
-     <div class="col-md-5">
-
-     <!-- person -->
-     <div class="post_box_person_stream">
+               <!-- person box -->
+               <div class="row">
+                   <div class="col-md-12">
+                       <div class="post_box_person">
                            <!-- photo -->
                            <div class="pull-left">
-                           	<% if post.mentions.any? %>
-                           		<%= image_tag "http://graph.facebook.com/#{post.mentions.first.uid}/picture?type=large", class: "img_face img-circle img-responsive" %>
-                           	<% else %>
-                           	 <%= image_tag "123.jpg", class:"img_face img-circle img-responsive" %>
-                           	<% end %>
-                               
+                               <img src="images/face_placeholder.jpg" class="img_face img-circle img-responsive" />
                            </div>
                            <div class="pull-left">
-                           	<% if post.mentioned_users.any? %>
                               <div class="post_caption">
                                posted about
                               </div>
                               <div class="post_name">
-                               <%= post.mentions.first.user.name %>
+                               John Kohler
                               </div>
-                              <% else %>
-                              	<div class="post_caption">
-                               posted about
-                              </div>
-                              <div class="post_name">
-                               ???
-                              </div>
-
-                              <% end %>
                               <div class="post_date">
-                               Posted <%= time_ago_in_words(post.created_at) %> ago
+                               Saturday, February 7th, 2014
                               </div>
                            </div>
                            <div class="clearfix"></div>
                        </div>
+                   </div>
+               </div>
 
-                       <div style="margin-top:25px;">
-                         <button type="button" class="btn btn-danger" id="cta_share_twitter">
+                   <!-- social sharing buttons -->
+                   <div class="row">
+                       <div class="col-md-12">
+                           <div class="post_box_social">
+                               <button type="button" class="btn btn-danger" id="cta_share_twitter">
                                    <i class="fa fa-twitter"></i> tweet
                                </button>
 
                                <button type="button" class="btn btn-info" id="cta_share_facebook">
                                    <i class="fa fa-facebook"></i> share
                                </button>
+                           </div>
                        </div>
+                   </div>
+               </div>
 
-     </div>
-     </div><!-- end stream row -->
-
-   	<% end %>
-
-   	</div><!-- close container - title and subtitle -->
+    </div><!-- close container -->
    </div><!-- close content area -->
-
 
    </body>
  </html>
-
-
-
-
-
-
-
-
-
-<% end %>
-

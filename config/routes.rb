@@ -6,8 +6,9 @@ Gossiply::Application.routes.draw do
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
   match '/users/friends/:id', to:'users#friends', via: 'get'
+  match '/home', to:'generic_pages#home', via:'get'
 
-  root 'generic_pages#home'
+  root 'generic_pages#index'
   resources :users
   resources :posts, dependent: :destroy
   # The priority is based upon order of creation: first created -> highest priority.

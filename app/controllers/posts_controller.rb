@@ -22,6 +22,11 @@ class PostsController < ApplicationController
   def show
     @post = Post.find params[:id]
   end
+  def new
+    @graph = Koala::Facebook::API.new(current_user.oauth_token) 
+    @profile = @graph.get_object("me")
+    @post = current_user.posts.build
+  end
 
   def destroy
     @post = Post.find params[:id]
