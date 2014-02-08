@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :signed_in_user
 	def create
     @post = current_user.posts.build(micropost_params)
     text = @post.text
@@ -10,12 +11,12 @@ class PostsController < ApplicationController
       user_id = user_id.delete('@')
       mention = Mention.new(uid: user_id, post_id: @post.id )
       mention.save
-      redirect_to @post
+
     end
+          redirect_to @post
     else
       redirect_to @post
     end
-    redirect_to @post
   end
 
   def show

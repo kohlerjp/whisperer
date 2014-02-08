@@ -11,6 +11,12 @@ class ApplicationController < ActionController::Base
 			@current_user = nil
 		end
 	  end
+	  def signed_in_user
+	  	if current_user.nil?
+	  		redirect_to root_url
+	  	end
+	  end
 	  helper_method :current_user
+	  helper_method :signed_in_user
   
 end
