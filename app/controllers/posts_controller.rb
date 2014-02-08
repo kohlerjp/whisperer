@@ -1,5 +1,10 @@
 class PostsController < ApplicationController
   before_action :signed_in_user
+  before_filter :set_access
+
+def set_access
+  @response.headers["Access-Control-Allow-Origin"] = "*"
+end
 	def create
     @post = current_user.posts.build(micropost_params)
     text = @post.text
