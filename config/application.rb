@@ -5,6 +5,10 @@ require 'rails/all'
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
+config.action_dispatch.default_headers = {
+  'Access-Control-Allow-Origin' => '*',
+  'Access-Control-Request-Method' => '*'
+}
 
 module Gossiply
   class Application < Rails::Application
