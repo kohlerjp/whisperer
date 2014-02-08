@@ -18,6 +18,9 @@
 	<% @user.posts.each do |post| %>
 		<li>
 			<%= link_to(post.text,post) %>
+			<% if post.user_id == current_user.id %>
+				| <%= link_to "delete", post, method: :delete %>
+			<% end %>
 		</li>
 	<% end %>
 </ul>

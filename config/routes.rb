@@ -8,7 +8,7 @@ Gossiply::Application.routes.draw do
 
   root 'generic_pages#home'
   resources :users
-  resources :posts
+  resources :posts, dependent: :destroy
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

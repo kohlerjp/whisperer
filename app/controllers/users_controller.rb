@@ -5,4 +5,8 @@ class UsersController < ApplicationController
 		@profile = @graph.get_object("me")
 		@post = current_user.posts.build
 	end
+
+	def index
+		@users = User.all
+	end
 end

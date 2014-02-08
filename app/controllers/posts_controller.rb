@@ -10,15 +10,28 @@ class PostsController < ApplicationController
       user_id = user_id.delete('@')
       mention = Mention.new(uid: user_id, post_id: @post.id )
       mention.save
+      redirect_to @post
     end
-      redirect_to current_user
     else
+      redirect_to @post
     end
+    redirect_to @post
   end
 
   def show
     @post = Post.find params[:id]
   end
+
+  def destroy
+    @post = Post.find params[:id]
+    mentions = Mention.where(post_id:@post.id)
+    mentions.each do |mention|
+      mention.destroy
+    end
+    @post.destroy
+    redirect_to current_user
+  end
+
 
   private
 
