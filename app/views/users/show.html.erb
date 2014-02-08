@@ -6,16 +6,31 @@
 <%= form_for(@post) do |f| %>
   <div class="field">
     <%= f.text_area :text, placeholder: "Compose new post" %>
+    <br/>
+    <%= f.label :anonymous %>
+    <%= f.check_box :anonymous,checked:true %>
   </div>
   <%= f.submit "Post", class: "btn btn-large btn-primary" %>
 <% end %>
 
+<h2> <%= @profile["first_name"] %>'s posts </h2>
 <ul>
 	<% @user.posts.each do |post| %>
 		<li>
-			<%= post.text %>
+			<%= link_to(post.text,post) %>
 		</li>
 	<% end %>
+</ul>
+
+<h2>@Mentions</h2>
+<ul>
+<% @user.mentions.each do |mention| %>
+	<li>
+		<%= mention.post.text %>
+	</li>
+
+<% end %>
+
 </ul>
 
 <%= @profile.inspect %>

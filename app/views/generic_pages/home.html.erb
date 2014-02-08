@@ -3,11 +3,15 @@
 <% profile = @graph.get_object("me") %>
 <% friends = @graph.get_connections("me", "friends") %>
 <ul>
-<% friends.each do |f| %>
-  <li>
-    <%= f["name"] %>
-  </li>
+	<% friends_id_array = [] %>
+<% friends.each do |friend| %>
+  <% friends_id_array << friend["id"]  %>
 
+ <% end %>
+ <% feed_posts = Post.find_all_by_user_id(friends_id_array,limit: 30) %>
+ <% feed_posts.each do |post| %>
+
+ <%= post.text %>
  <% end %>
 </ul>
 <% end %>
