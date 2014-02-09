@@ -4,33 +4,8 @@
 	<%= @profile["name"] %>
 </h1>
 
-<%= form_for(@post) do |f| %>
-  <div class="field">
-    <%= f.text_area :text, placeholder: "Compose new post" %>
-    <br/>
-    <%= f.label :anonymous %>
-    <%= f.check_box :anonymous,checked:true %>
-  </div>
-  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
-<% end %>
 
 
-<h2>@Mentions</h2>
-<ul>
-<% @user.mentions.each do |mention| %>
-	<li>
-		<% display_text = mention.post.text %>
-		<% my_uids = mention.post.text.scan(/@[^ \t]*/) %>
-		
-		<% my_uids.each do |my_uid| %>
-		<% puts my_uid %>
-			<% my_uid = my_uid.delete('@') %>
-			<% display_text = display_text.sub(my_uid,getName(my_uid)) %>
-		<% end %>
-		<%= display_text %>
-	</li>
-
-<% end %>
 
 </ul>
 

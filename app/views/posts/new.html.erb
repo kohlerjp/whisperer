@@ -72,8 +72,10 @@
           <div class="row input-message">
             <div class="col-md-12">
               <div class="post_text">
-                <textarea class="input_post_text" placeholder="gossip away! you have 130 characters."></textarea>
+                <%= form_for(@post) do |f| %>
+                <%= f.text_area :text, placeholder: "Compose new post" , class: "input_post_text "%>
                             <div class="word-counter"></div>
+                <input type="hidden" name="post[:mentioned]" id="hidden_uid">
               </div>
             </div>
           </div>
@@ -81,11 +83,11 @@
           <!-- button - post -->
           <div class="row input-submit">
             <div class="col-md-12" id="home_signup">
-              <button type="button" class="btn btn-success" id="cta_home_signup">
-                post
-              </button>
+              
+              <%= f.submit "Post", class: "btn btn-success", id:"cta_home_signup" %>
+              <% end %>
               <div id="home_signup_hint">
-                don't worry, <!-- dynamic name -->John will never know it was you.
+                don't worry, <!-- dynamic name --><span class="dyname">John </span> will never know it was you.
               </div>
             </div>
           </div>
@@ -168,6 +170,7 @@ var suggest = function (matches, suggestions) {
 };
 
 var slideSelect = function (match) {
+    $('#hidden_uid').val(match.id)
 
     $('.input-search-box').animate({
         opacity: 0,

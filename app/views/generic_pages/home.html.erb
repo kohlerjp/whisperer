@@ -75,7 +75,7 @@
                            <!-- photo -->
                            <div class="pull-left">
                            	<% if post.mentions.any? %>
-                           		<%= image_tag "http://graph.facebook.com/#{post.mentions.first.uid}/picture?height=100&width=100", class: "img_face img-circle img-responsive" %>
+                           		<%= image_tag "http://graph.facebook.com/#{post.mentions.first.user.uid}/picture?height=100&width=100", class: "img_face img-circle img-responsive" %>
                            	<% else %>
                            	 <%= image_tag "123.jpg", class:"img_face img-circle img-responsive" %>
                            	<% end %>
