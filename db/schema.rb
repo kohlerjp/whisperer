@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20140209015347) do
     t.boolean  "anonymous",  default: true
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sentiment",  default: 0
+    t.string   "sentiment",  default: "neutral"
   end
 
   create_table "users", force: true do |t|

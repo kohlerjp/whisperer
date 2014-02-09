@@ -1,11 +1,16 @@
 class PostsController < ApplicationController
+  require 'open-uri'
+require 'json'
 
 	def create
     @post = current_user.posts.build(micropost_params)
-    response = HTTParty.get("http://api.datumbox.com/1.0/SentimentAnalysis.json?api_key=a58c154d6ab8e1b4a0d69590668591d7&text=#{params[:post][:text]}")
+    safe_text = params[:post][:text].gsub(/\s/,'%20')
+    response = HTTParty.get("http://api.datumbox.com/1.0/SentimentAnalysis.json?api_key=a58c154d6ab8e1b4a0d69590668591d7&text=#{safe_text}")
     body = JSON.parse(response.body)
-    result = body["result"]
-    puts "************************************  #{result} **************************"
+    result = body["output"]["result"]
+    @post.sentiment = result
+      
+
     
     if @post.save
       myid = params[:post][:mentioned]

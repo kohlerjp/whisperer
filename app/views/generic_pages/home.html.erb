@@ -60,7 +60,7 @@
    	<div class="container">
 
    	<% feed_posts.each do |post| %>
-   		<div class="row stream_row">
+   		<div class="row stream_row <%= post.sentiment %>">
 
      <!-- post -->
      <div class="col-md-7 stream_post">
