@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140208075232) do
+ActiveRecord::Schema.define(version: 20140209015347) do
 
   create_table "mentions", force: true do |t|
     t.string   "uid"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20140208075232) do
     t.boolean  "anonymous",  default: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sentiment",  default: 0
   end
 
   create_table "users", force: true do |t|

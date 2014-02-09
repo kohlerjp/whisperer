@@ -75,29 +75,22 @@
                            <!-- photo -->
                            <div class="pull-left">
                            	<% if post.mentions.any? %>
-                           		<%= image_tag "http://graph.facebook.com/#{post.mentions.first.user.uid}/picture?height=100&width=100", class: "img_face img-circle img-responsive" %>
+                            <% my_query = "SELECT name FROM profile WHERE id = #{post.mentions.first.uid}"%>
+                           		<%= image_tag "http://graph.facebook.com/#{post.mentions.first.uid}/picture?height=100&width=100", class: "img_face img-circle img-responsive" %>
                            	<% else %>
                            	 <%= image_tag "123.jpg", class:"img_face img-circle img-responsive" %>
                            	<% end %>
                                
                            </div>
                            <div class="pull-left">
-                           	<% if post.mentioned_users.any? %>
                               <div class="post_caption">
                                posted about
                               </div>
                               <div class="post_name">
-                               <%= post.mentions.first.user.name %>
-                              </div>
-                              <% else %>
-                              	<div class="post_caption">
-                               posted about
-                              </div>
-                              <div class="post_name">
-                               ???
+                                <%= @rest.fql_query(my_query)[0]["name"] %>
                               </div>
 
-                              <% end %>
+
                               <div class="post_date">
                                Posted <%= time_ago_in_words(post.created_at) %> ago
                               </div>

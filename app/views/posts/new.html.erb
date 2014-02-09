@@ -75,7 +75,7 @@
                 <%= form_for(@post) do |f| %>
                 <%= f.text_area :text, placeholder: "Compose new post" , class: "input_post_text "%>
                             <div class="word-counter"></div>
-                <input type="hidden" name="post[:mentioned]" id="hidden_uid">
+                <input type="hidden" name="post[mentioned]" id="hidden_uid">
               </div>
             </div>
           </div>
@@ -163,7 +163,7 @@ var suggest = function (matches, suggestions) {
             elem.innerHTML = '<a href="#"><div class="pull-left"><img src="' + matches[i].image +'" class="img_face img-circle img-responsive"></div>' +
                     '<div class="pull-left"><div class="post_name_create">' + matches[i].name +
                     '</div></div><div class="clearfix"></div></div></a>';
-            elem.onclick = slideSelect.bind(this, matches[i]);
+          elem.onclick = slideSelect.bind(this, matches[i]);
         // add the div element to the suggestions
         suggestions.appendChild(elem);
     }

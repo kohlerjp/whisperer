@@ -2,9 +2,14 @@ class PostsController < ApplicationController
 
 	def create
     @post = current_user.posts.build(micropost_params)
+    response = HTTParty.get("http://api.datumbox.com/1.0/SentimentAnalysis.json?api_key=a58c154d6ab8e1b4a0d69590668591d7&text=#{params[:post][:text]}")
+    body = JSON.parse(response.body)
+    result = body["result"]
+    puts "************************************  #{result} **************************"
     
     if @post.save
-         mention = Mention.new(uid: params[:post][:mentioned],post_id: params[:post_id] )
+      myid = params[:post][:mentioned]
+         mention = Mention.new(uid: myid,post_id: @post.id )
          mention.save
         redirect_to @post
     else
@@ -14,6 +19,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find params[:id]
+    @rest = Koala::Facebook::API.new(current_user.oauth_token)
   end
   def new
     @graph = Koala::Facebook::API.new(current_user.oauth_token) 
@@ -30,9 +36,20 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to current_user
   end
+  def index
+    @posts = Post.all
+    respond_to do |format|
+      format.json { render :json => @posts }
+    end
+    
+  end
 
 
   private
+
+    def mention_params
+      params.require(:post).permit(:mentioned)
+    end
 
   	def micropost_params
 
