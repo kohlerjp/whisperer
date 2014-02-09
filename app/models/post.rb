@@ -5,4 +5,5 @@ class Post < ActiveRecord::Base
 	has_many :mentioned_users, through: :mentions, source: :user
 
 	validates :text, presence: true, length: {maximum:130}
+	attr_accessor :mentioned
 end

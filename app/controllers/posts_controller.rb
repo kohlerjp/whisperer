@@ -43,14 +43,26 @@ require 'json'
   end
   def index
     @posts = Post.all
-    respond_to do |format|
-      format.json { render :json => @posts }
+    @posts.each do |p|
+      p.mentioned = p.mentions.first.uid
+    end
+
+     respond_to do |format|
+      format.json do
+        render :json => @posts.to_json(except: :user_id, :include => { :mentions => { :only => :uid } })
+      end
     end
     
   end
 
 
   private
+
+  def as_json(*args)
+  hash = super(*args)
+  hash[:mentioned] = Post.find(hash[:post_id]).mentions.first.uid
+  hash.merge!(hash)
+  end
 
     def mention_params
       params.require(:post).permit(:mentioned)

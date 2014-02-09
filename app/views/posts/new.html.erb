@@ -34,9 +34,8 @@
         <%= javascript_include_tag "post_create" %>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
       <script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="bootstrap/js/bootstrap.js"></script>
-        <script src="javascript/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-        <script src="javascript/post_create.js"></script>
+      <%= javascript_include_tag "bootstrap" %>
+        <%= javascript_include_tag "modernizr-2.6.2-respond-1.1.0.min" %>
 
 
     </head>
@@ -67,12 +66,12 @@
                         </div>
             </div>
           </div>
-
+          <%= form_for(@post) do |f| %>
           <!-- input - create post -->
           <div class="row input-message">
             <div class="col-md-12">
               <div class="post_text">
-                <%= form_for(@post) do |f| %>
+                
                 <%= f.text_area :text, placeholder: "Compose new post" , class: "input_post_text "%>
                             <div class="word-counter"></div>
                 <input type="hidden" name="post[mentioned]" id="hidden_uid">
