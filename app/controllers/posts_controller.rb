@@ -58,11 +58,7 @@ require 'json'
 
   private
 
-  def as_json(*args)
-  hash = super(*args)
-  hash[:mentioned] = Post.find(hash[:post_id]).mentions.first.uid
-  hash.merge!(hash)
-  end
+
 
     def mention_params
       params.require(:post).permit(:mentioned)

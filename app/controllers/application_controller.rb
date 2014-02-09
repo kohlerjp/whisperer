@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :exception, only: :delete
   before_filter :allow_cross_domain_access
     def allow_cross_domain_access
        response.headers["Access-Control-Allow-Headers"] = "Content-Type, X-Requested-With"
